@@ -1,20 +1,59 @@
+import { useEffect, useState } from "react"
 import { ArrowRight, MapPin } from "lucide-react"
 import { site } from "@/data/portfolio"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion"
+import { HeroNetworkDoodle } from "@/components/visuals/portfolio-doodles"
 
 export function Hero() {
+  const reducedMotion = usePrefersReducedMotion()
+  const [parallaxY, setParallaxY] = useState(0)
+  const [roleIndex, setRoleIndex] = useState(0)
+
+  useEffect(() => {
+    if (reducedMotion) return
+    const onScroll = () => {
+      setParallaxY(window.scrollY * 0.14)
+    }
+    window.addEventListener("scroll", onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [reducedMotion])
+
+  useEffect(() => {
+    if (reducedMotion) return
+    const n = site.roleCycle.length
+    const id = window.setInterval(() => {
+      setRoleIndex((i) => (i + 1) % n)
+    }, 3200)
+    return () => window.clearInterval(id)
+  }, [reducedMotion])
+
+  const roleText =
+    site.roleCycle[reducedMotion ? 0 : roleIndex] ?? site.title
+
   return (
     <section
       id="top"
       className="relative overflow-hidden border-b border-border/40"
     >
       <div
-        className="pointer-events-none absolute inset-0 bg-grid-subtle bg-[length:56px_56px] opacity-[0.45]"
+        className="pointer-events-none absolute inset-0 bg-grid-subtle bg-[length:56px_56px] opacity-[0.18]"
         aria-hidden
       />
-      <div className="pointer-events-none absolute -right-24 top-20 h-72 w-72 rounded-full bg-primary/[0.06] blur-3xl" />
-      <div className="pointer-events-none absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-primary/[0.04] blur-3xl" />
+
+      <div
+        className="pointer-events-none absolute -right-8 top-6 w-[min(92vw,640px)] opacity-[0.14] motion-reduce:opacity-[0.1]"
+        style={
+          reducedMotion
+            ? undefined
+            : { transform: `translate3d(0, ${parallaxY * 0.6}px, 0)` }
+        }
+        aria-hidden
+      >
+        <HeroNetworkDoodle className="h-auto w-full text-primary" />
+      </div>
 
       <div className="relative mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-28 lg:py-32">
         <div className="max-w-3xl space-y-8">
@@ -37,10 +76,15 @@ export function Hero() {
               {site.name}
             </h1>
             <p
-              className="text-lg text-primary sm:text-xl font-medium opacity-0 animate-fade-up"
+              className="min-h-[1.75rem] text-lg font-medium text-primary sm:text-xl opacity-0 animate-fade-up"
               style={{ animationDelay: "200ms" }}
             >
-              {site.title}
+              <span
+                key={reducedMotion ? "static-role" : roleText}
+                className="inline-block animate-in fade-in zoom-in-95 duration-500 motion-reduce:animate-none"
+              >
+                {roleText}
+              </span>
             </p>
             <p
               className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg opacity-0 animate-fade-up"
@@ -48,11 +92,32 @@ export function Hero() {
             >
               {site.tagline}
             </p>
+
+            <div
+              className="flex flex-wrap gap-2 pt-1 opacity-0 animate-fade-up sm:gap-3"
+              style={{ animationDelay: "300ms" }}
+            >
+              {site.credibilityStrip.map((row) => (
+                <div
+                  key={row.rest}
+                  className="inline-flex items-baseline gap-1.5 rounded-lg border border-border/60 bg-card/40 px-3 py-2 backdrop-blur-sm"
+                >
+                  {row.accent ? (
+                    <span className="font-mono text-sm font-semibold tabular-nums text-primary">
+                      {row.accent}
+                    </span>
+                  ) : null}
+                  <span className="text-xs font-medium text-muted-foreground sm:text-sm">
+                    {row.rest}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div
             className="flex flex-wrap gap-3 opacity-0 animate-fade-up"
-            style={{ animationDelay: "320ms" }}
+            style={{ animationDelay: "340ms" }}
           >
             <Button asChild>
               <a href="#projects">
@@ -69,20 +134,6 @@ export function Hero() {
               <a href={`mailto:${site.email}`}>Email</a>
             </Button>
           </div>
-
-          <dl
-            className="grid gap-6 border-t border-border/60 pt-10 sm:grid-cols-3 opacity-0 animate-fade-up"
-            style={{ animationDelay: "400ms" }}
-          >
-            {site.heroFacts.map((row) => (
-              <div key={row.label}>
-                <dt className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
-                  {row.label}
-                </dt>
-                <dd className="mt-1.5 text-sm text-foreground">{row.value}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
       </div>
     </section>

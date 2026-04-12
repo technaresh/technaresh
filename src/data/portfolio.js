@@ -25,19 +25,18 @@ export const site = {
       value: "Written specs, async updates, tight review loops",
     },
   ],
-  heroFacts: [
-    {
-      label: "Focus",
-      value: "Cloud (AWS), backend, applied AI & analysis",
-    },
-    {
-      label: "Stack ethos",
-      value: "Secure defaults, observable, easy to operate",
-    },
-    {
-      label: "Working style",
-      value: "Clarity first, iterate with data",
-    },
+  /** Short stats shown under the hero intro — badge style. */
+  credibilityStrip: [
+    { accent: "5+", rest: "Years Engineering" },
+    { accent: "3×", rest: "AWS Certified" },
+    { accent: null, rest: "Production AI Systems" },
+  ],
+  /** Cycles in the hero role line (see Hero component). */
+  roleCycle: [
+    "Senior Software Engineer",
+    "Cloud Architect (AWS)",
+    "Applied AI Builder",
+    "Backend Systems Engineer",
   ],
   footerTagline: "Consistently improving.",
   pageTitle: "TechNaresh",
@@ -103,6 +102,9 @@ export const projects = [
     blurb:
       "Unified access to Bedrock models behind auth, quotas, and audit logging for internal product teams.",
     tags: ["AWS", "Bedrock", "FastAPI", "Python", "IAM"],
+    impactSignal: 0.82,
+    approachStrip:
+      "Gateway + IAM keys + Bedrock routing with audit logs and quotas.",
     metrics: "Placeholder metric — e.g. latency SLO met under peak load",
     problem:
       "Teams were calling foundation models ad hoc, with inconsistent policies and no central visibility into usage or cost.",
@@ -119,6 +121,9 @@ export const projects = [
     blurb:
       "Structured tool contracts so assistants can call internal APIs safely with schema validation and timeouts.",
     tags: ["MCP", "Python", "OpenAPI", "LLMs"],
+    impactSignal: 0.76,
+    approachStrip:
+      "OpenAPI-style tool schemas, timeouts, rate limits, golden-prompt tests.",
     metrics: "Placeholder — e.g. reduced failed tool calls after launch",
     problem:
       "LLM demos worked in slides but broke in production when tools were underspecified or overloaded core services.",
@@ -135,6 +140,9 @@ export const projects = [
     blurb:
       "Event ingestion and curated datasets for dashboards—with lineage and ownership documented for stakeholders.",
     tags: ["AWS", "Python", "SQL", "ETL"],
+    impactSignal: 0.71,
+    approachStrip:
+      "Standardized ingestion, naming, refresh jobs, aligned metric definitions.",
     metrics: "Placeholder — e.g. fresher dashboards or fewer manual extracts",
     problem:
       "Reporting depended on one-off exports; metrics definitions drifted between teams.",
@@ -152,6 +160,7 @@ export const projects = [
 export const experience = [
   {
     company: "[Current employer — update]",
+    current: true,
     role: "Senior Software Engineer",
     period: "20XX — Present",
     points: [
@@ -163,6 +172,7 @@ export const experience = [
   },
   {
     company: "[Previous employer — update]",
+    current: false,
     role: "Software Engineer",
     period: "20XX — 20XX",
     points: [
@@ -179,11 +189,13 @@ export const experience = [
  */
 export const credentials = [
   {
+    kind: "github",
     title: "GitHub achievements — Pull Shark ×3, YOLO, Pair Extraordinaire, Quickdraw",
     issuer: "GitHub · technaresh",
     year: "—",
   },
   {
+    kind: "aws",
     title: "AWS certifications — add exact titles (e.g. Solutions Architect, Developer)",
     issuer: "Amazon Web Services",
     year: "—",

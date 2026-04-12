@@ -73,6 +73,41 @@ export default {
         shimmer: {
           "100%": { transform: "translateX(100%)" },
         },
+        "role-cycle": {
+          "0%, 22%": { opacity: "1" },
+          "25%, 100%": { opacity: "0" },
+        },
+        "timeline-node-pulse": {
+          "0%, 100%": {
+            boxShadow: "0 0 0 0 hsl(var(--primary) / 0.35)",
+          },
+          "50%": {
+            boxShadow: "0 0 0 6px hsl(var(--primary) / 0)",
+          },
+        },
+        "gradient-border-flow": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "doodle-dash": {
+          to: { strokeDashoffset: "0" },
+        },
+        "arrow-point": {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "50%": { transform: "translate(4px, 4px)" },
+        },
+        "foil-sheen": {
+          "0%": { transform: "translateX(-120%) skewX(-12deg)" },
+          "100%": { transform: "translateX(220%) skewX(-12deg)" },
+        },
+        "arrow-frame-a": {
+          "0%, 48%": { opacity: "1" },
+          "52%, 100%": { opacity: "0.2" },
+        },
+        "arrow-frame-b": {
+          "0%, 48%": { opacity: "0.25" },
+          "52%, 100%": { opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -80,6 +115,15 @@ export default {
         "fade-up": "fade-up 0.6s ease-out forwards",
         "fade-in": "fade-in 0.5s ease-out forwards",
         shimmer: "shimmer 2s infinite",
+        "timeline-node-pulse":
+          "timeline-node-pulse 2.8s ease-in-out infinite",
+        "gradient-border-flow":
+          "gradient-border-flow 10s ease-in-out infinite",
+        "doodle-dash": "doodle-dash 2.4s ease-out forwards",
+        "arrow-point": "arrow-point 1.6s ease-in-out infinite",
+        "foil-sheen": "foil-sheen 0.9s ease-out",
+        "arrow-frame-a": "arrow-frame-a 1.4s steps(1, end) infinite",
+        "arrow-frame-b": "arrow-frame-b 1.4s steps(1, end) infinite",
       },
       backgroundImage: {
         "grid-subtle":

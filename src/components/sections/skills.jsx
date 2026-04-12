@@ -1,6 +1,30 @@
 import { skillTabs } from "@/data/portfolio"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Card, CardContent } from "@/components/ui/card"
+
+function LaneConnector() {
+  return (
+    <div
+      className="hidden shrink-0 items-center self-stretch pt-10 md:flex"
+      aria-hidden
+    >
+      <svg
+        width="28"
+        height="120"
+        viewBox="0 0 28 120"
+        className="text-primary/30"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6 60h12M14 52l8 8-8 8"
+          stroke="currentColor"
+          strokeWidth="1.15"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </div>
+  )
+}
 
 export function Skills() {
   return (
@@ -14,47 +38,45 @@ export function Skills() {
             Depth across the ML product stack
           </h2>
           <p className="text-muted-foreground">
-            Grouped for scanning—each area reflects hands-on ownership, not keyword
-            stuffing.
+            Three delivery lanes—how models, data, and engineering connect from
+            experiment to production.
           </p>
         </div>
 
-        <Tabs defaultValue="ml" className="w-full">
-          <TabsList className="grid h-auto w-full grid-cols-3 p-1 sm:inline-flex sm:w-auto">
-            {skillTabs.map((tab) => (
-              <TabsTrigger
-                key={tab.id}
-                value={tab.id}
-                className="flex-1 px-4 py-2 text-xs sm:text-sm"
-              >
-                {tab.label}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+        <div className="relative rounded-xl border border-border/50 bg-background/20 p-4 md:p-6">
+          <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground md:absolute md:left-6 md:top-4 md:mb-0">
+            Flow · ML &amp; AI → Data → Engineering
+          </p>
 
-          {skillTabs.map((tab) => (
-            <TabsContent key={tab.id} value={tab.id}>
-              <Card className="border-border/70 bg-card/60">
-                <CardContent className="p-6 md:p-8">
-                  <ul className="grid gap-3 sm:grid-cols-2">
+          <div className="mt-6 flex flex-col gap-6 md:mt-10 md:flex-row md:items-stretch md:gap-0">
+            {skillTabs.map((tab, index) => (
+              <div key={tab.id} className="contents md:contents">
+                <div
+                  className="flex min-h-0 flex-1 flex-col rounded-xl border border-border/60 bg-card/50 p-4 transition-[box-shadow,background-color] duration-300 hover:bg-card/70 hover:shadow-[0_0_28px_-10px_hsl(var(--primary)/0.35)] md:p-5"
+                >
+                  <div className="mb-3 flex items-center justify-between gap-2 border-b border-border/40 pb-3">
+                    <h3 className="font-display text-sm font-semibold text-foreground">
+                      {tab.label}
+                    </h3>
+                    <span className="font-mono text-[10px] text-primary/80">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <ul className="flex flex-1 flex-col gap-2">
                     {tab.items.map((item) => (
-                      <li
-                        key={item}
-                        className="flex items-start gap-3 rounded-lg border border-border/40 bg-background/40 px-4 py-3 text-sm text-foreground/90"
-                      >
-                        <span
-                          className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/70"
-                          aria-hidden
-                        />
-                        <span>{item}</span>
+                      <li key={item}>
+                        <span className="inline-flex w-full rounded-lg border border-border/35 bg-background/35 px-3 py-2 text-left text-xs leading-snug text-foreground/90 transition-colors duration-200 hover:border-primary/25 hover:text-foreground">
+                          {item}
+                        </span>
                       </li>
                     ))}
                   </ul>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          ))}
-        </Tabs>
+                </div>
+                {index < skillTabs.length - 1 ? <LaneConnector /> : null}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )

@@ -10,7 +10,8 @@
     --card-foreground: 210 20% 96%;
     --popover: 222 20% 11%;
     --popover-foreground: 210 20% 96%;
-    --primary: 172 45% 48%;
+    /* Teal accent ~ #00c9b1 */
+    --primary: 172 100% 39%;
     --primary-foreground: 222 22% 8%;
     --secondary: 220 14% 16%;
     --secondary-foreground: 210 18% 92%;
@@ -32,6 +33,12 @@
 
   html {
     scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
