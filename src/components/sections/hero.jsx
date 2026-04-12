@@ -6,43 +6,16 @@ import { Badge } from "@/components/ui/badge"
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion"
 import { HeroNetworkDoodle } from "@/components/visuals/portfolio-doodles"
 import { cn } from "@/lib/utils"
+import {
+  getProfilePhotoCandidates,
+  initialsFromName,
+} from "@/lib/profile-photo"
 
 const TEAL = "#00c9b1"
 const TEAL_GLOW = "0 0 48px -12px rgba(0, 201, 177, 0.15)"
 
-/** Vite `public/` files must respect `base` (e.g. GitHub Pages subpath). */
-function resolvePublicUrl(path) {
-  if (!path || /^https?:\/\//i.test(path)) return path
-  const normalized = path.startsWith("/") ? path.slice(1) : path
-  const base = import.meta.env.BASE_URL || "/"
-  if (base === "/") return `/${normalized}`
-  const prefix = base.endsWith("/") ? base : `${base}/`
-  return `${prefix}${normalized}`
-}
-
-function initialsFromName(name) {
-  const parts = name.trim().split(/\s+/).filter(Boolean)
-  if (parts.length === 0) return "?"
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase()
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
-}
-
 function HeroProfilePhoto({ badgeLabel, name, reducedMotion }) {
-  const candidates = useMemo(() => {
-    const trimmed = (site.profilePhotoSrc ?? "").trim()
-    const primary = trimmed || "/assets/profile.jpg"
-    const extras = site.profilePhotoFallbacks ?? []
-    const seen = new Set()
-    const out = []
-    for (const p of [primary, ...extras]) {
-      const url = resolvePublicUrl(p)
-      if (url && !seen.has(url)) {
-        seen.add(url)
-        out.push(url)
-      }
-    }
-    return out.length > 0 ? out : ["/assets/profile.jpg"]
-  }, [])
+  const candidates = useMemo(() => getProfilePhotoCandidates(), [])
 
   const [attempt, setAttempt] = useState(0)
   const [photoReady, setPhotoReady] = useState(false)
@@ -169,7 +142,7 @@ function HeroProfilePhoto({ badgeLabel, name, reducedMotion }) {
   )
 }
 
-export function Hero() {
+export function Hero({ sectionRef }) {
   const reducedMotion = usePrefersReducedMotion()
   const [parallaxY, setParallaxY] = useState(0)
   const [roleIndex, setRoleIndex] = useState(0)
@@ -202,6 +175,7 @@ export function Hero() {
   return (
     <section
       id="top"
+      ref={sectionRef}
       className="relative overflow-hidden border-b border-border/40"
     >
       <div

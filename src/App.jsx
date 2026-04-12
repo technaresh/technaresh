@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/sections/hero"
 import { About } from "@/components/sections/about"
@@ -8,11 +9,13 @@ import { Certifications } from "@/components/sections/certifications"
 import { Contact } from "@/components/sections/contact"
 
 function App() {
+  const [heroSectionEl, setHeroSectionEl] = useState(null)
+
   return (
     <div className="min-h-svh bg-background text-foreground">
-      <Navbar />
+      <Navbar heroSectionEl={heroSectionEl} />
       <main>
-        <Hero />
+        <Hero sectionRef={setHeroSectionEl} />
         <About />
         <Skills />
         <Projects />
