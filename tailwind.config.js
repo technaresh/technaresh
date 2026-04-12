@@ -108,6 +108,10 @@ export default {
           "0%, 48%": { opacity: "0.25" },
           "52%, 100%": { opacity: "1" },
         },
+        "hero-conic-spin": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -124,6 +128,7 @@ export default {
         "foil-sheen": "foil-sheen 0.9s ease-out",
         "arrow-frame-a": "arrow-frame-a 1.4s steps(1, end) infinite",
         "arrow-frame-b": "arrow-frame-b 1.4s steps(1, end) infinite",
+        "hero-conic-spin": "hero-conic-spin 10s linear infinite",
       },
       backgroundImage: {
         "grid-subtle":

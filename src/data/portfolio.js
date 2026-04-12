@@ -40,6 +40,21 @@ export const site = {
   ],
   footerTagline: "Consistently improving.",
   pageTitle: "TechNaresh",
+  /**
+   * Put the file in `public/assets/` so Vite serves it at `/assets/...`.
+   * If the primary URL 404s, `profilePhotoFallbacks` are tried (see hero.jsx defaults).
+   */
+  profilePhotoSrc: "/assets/profile.jpg",
+  /** Extra public URLs to try if `profilePhotoSrc` fails (extension or folder typos). */
+  profilePhotoFallbacks: [
+    "/assets/profile.jpeg",
+    "/assets/profile.png",
+    "/assets/profile.webp",
+    "/profile.jpg",
+    "/profile.png",
+  ],
+  /** Pill badge on the hero portrait (bottom-left). */
+  heroPhotoAvailabilityLabel: "Open to Opportunities",
   links: {
     github: "https://github.com/technaresh",
     linkedin: "https://www.linkedin.com/in/technaresh/",

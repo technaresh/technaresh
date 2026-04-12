@@ -15,6 +15,8 @@ const badgeVariants = cva(
         outline: "text-foreground border-border",
         muted:
           "border-border/60 bg-muted/50 text-muted-foreground",
+        heroAvailability:
+          "inline-flex items-center rounded-full border-border/70 bg-card/95 px-3 py-1 text-primary shadow-sm backdrop-blur-md",
       },
     },
     defaultVariants: {
