@@ -15,6 +15,8 @@
 
 ![](https://github-profile-trophy.vercel.app/?username=technaresh&theme=onedark&no-frame=true&no-bg=true&margin-w=4)
 
-![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=merko)
+![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=merko)<br>
+###### Refresh this page for new quote!
+
 ---
 [![](https://komarev.com/ghpvc/?username=technaresh&icon=1)](https://visitcount.itsvg.in)
